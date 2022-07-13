@@ -3,27 +3,35 @@ library(ggplot2)
 library(dplyr)
 
 options(stringsAsFactors = FALSE)
+# Read in data
 wages <- read.csv("data/wages.csv")
 crime <- read.csv("data/crime.csv")
 
 # Estimating a function
-
+# Note lm() is used to fit linear models, in this case, y=tc2009 and x=low
 mod <- lm(tc2009 ~ low, data = crime)
 
 tc2009 ~ low
 class(tc2009 ~ low)
 
+# view all information associated with the fitted linear model
 mod
 
+# identify possible values to view closer
 names(mod)
 
+# go through summary of fitted linear model
 summary(mod)
+# make prediction with fitted linear model
 predict(mod)
+# get residuals from prediction of fitted linear model
 resid(mod)
 
+# get coefficient values from line of best fit generated with lm()
 coef(mod)
 coefficients(mod)
 
+# generate quick plot with crime data and prediction
 qplot(low, predict(mod), data = crime, geom = "line")
 
 qplot(low, tc2009, data = crime) + 
